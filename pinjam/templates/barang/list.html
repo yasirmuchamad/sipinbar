@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h3>{{ title }}</h3>
+    <table border="1">
+        <thead>
+            <th>Nama Barang</th>
+            <th>Stock</th>
+            <th>Aksi</th>
+        </thead>
+        <tbody>
+            {% for b in barangs %}
+            <tr>
+                <td>
+                    {{ b.nama_barang }}
+                </td>
+                <td>
+                    {{ b.stock }}
+                </td>
+                <td>update | delete</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <ul>
+    </ul>
+</body>
+</html>

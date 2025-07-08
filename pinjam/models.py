@@ -1,4 +1,6 @@
 from django.db import models
+from django.utils import timezone
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Barang(models.Model):
@@ -22,9 +24,9 @@ class Pinjam(models.Model):
     """Model definition for Pinjam."""
 
     # TODO: Define fields here
-    karyawan    = models.ForeignKey(Users, on_delete = models.CASCADE)
-    barang      = models.ForeignKey(Barang, on_delete = Models.CASCADE)
-    tgl_pinjam  = models.DateTimeField(default=Timezone.now)
+    karyawan    = models.ForeignKey(User, on_delete = models.CASCADE)
+    barang      = models.ForeignKey(Barang, on_delete = models.CASCADE)
+    tgl_pinjam  = models.DateTimeField(default=timezone.now)
     
     class Meta:
         """Meta definition for Pinjam."""
