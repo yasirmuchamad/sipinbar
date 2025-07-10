@@ -10,3 +10,11 @@ class BarangForm(forms.ModelForm):
         model = Barang
         fields = '__all__'
 
+class PinjamForm(forms.ModelForm):
+    """Form definition for Pinjam."""
+
+    class Meta:
+        """Meta definition for Pinjamform."""
+
+        model = Pinjam
+        fields = '__all__'

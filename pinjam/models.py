@@ -17,23 +17,34 @@ class Barang(models.Model):
 
     def __str__(self):
         """Unicode representation of Barang."""
-        return f"(self.nama_barang)-(self.stock)"
+        return f"{self.nama_barang}-{self.stock}"
 
 
 class Pinjam(models.Model):
     """Model definition for Pinjam."""
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('disetujui', 'Disetujui'),
+        ('ditolak', 'Ditolak'),
+    ]
 
     # TODO: Define fields here
     karyawan    = models.ForeignKey(User, on_delete = models.CASCADE)
     barang      = models.ForeignKey(Barang, on_delete = models.CASCADE)
     tgl_pinjam  = models.DateTimeField(default=timezone.now)
-    
+    status      = models.CharField(
+                        max_length=16, 
+                        choices = STATUS_CHOICES,
+                        default = 'pending' 
+                    )
+
     class Meta:
         """Meta definition for Pinjam."""
 
         verbose_name = 'Pinjam'
         verbose_name_plural = 'Pinjams'
 
+
     def __str__(self):
         """Unicode representation of Pinjam."""
-        pass
+        return f"{self.karyawan}-{self.barang}-{self.status}"

@@ -9,4 +9,4 @@ class BarangAdmin(admin.ModelAdmin):
 
 @admin.register(Pinjam)
 class PinjamAdmin(admin.ModelAdmin):
-    list_display = ['karyawan', 'barang', 'tgl_pinjam']
+    list_display = ['karyawan', 'barang', 'tgl_pinjam', 'status']

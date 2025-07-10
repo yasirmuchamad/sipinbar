@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h3>{{ title }}</h3>
+    <table border="1">
+        <thead>
+            <th>Nama Peminjam</th>
+            <th>Nama Barang</th>
+            <th>Ketersediaan</th>
+            <th>Tgl Pinjam</th>
+            <th>Status</th>
+        </thead>
+        <tbody>
+            {% for p in pinjams %}
+            <tr>
+                <td>
+                    {{ p.karyawan }}
+                </td>
+                <td>
+                    {{ p.barang.nama_barang }}
+                </td>
+                <td>
+                    {{ p.barang.stock }}
+                </td>
+                <td>
+                    {{ p.tgl_pinjam }}
+                </td>
+                <td>
+                    
+                    {% if p.status == "pending" and user.is_staff %}
+                        <a href="{% url 'pinjam:approve_pinjam' p.id %}">Setujui</a>
+                    {% else %}
+                        {{ p.status|title }}
+                    {% endif %}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'pinjam:logout' %}">logout</a>
+</body>
+</html>
