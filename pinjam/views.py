@@ -36,8 +36,11 @@ def addBarang(request):
 
 @login_required
 def listPinjam(request):
-    pinjam = Pinjam.objects.all()
-
+    if request.user.is_staff:
+        pinjam = Pinjam.objects.all()
+    else:
+        pinjam = Pinjam.objects.filter(karyawan=request.user)
+        
     context = {
         'title' : "Daftar Terpinjam",
         'pinjams' : pinjam,
@@ -77,6 +80,19 @@ def approvePinjam(request, pk):
             pinjam.status = 'ditolak'
             pinjam.save()
 
+    return redirect('pinjam:list_pinjam')
+
+# @user_passes_test(is_admin),
+@user_passes_test(lambda u:u.is_staff)
+def returnPinjam(request, pk):
+    pinjam = Pinjam.objects.get(pk=pk)
+
+    if pinjam.status =='disetujui':
+        pinjam.status = 'dikembalikan'
+        pinjam.barang.stock += 1
+        pinjam.barang.save()
+        pinjam.save()
+    
     return redirect('pinjam:list_pinjam')
 
 def user_login(request):

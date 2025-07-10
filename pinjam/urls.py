@@ -12,4 +12,5 @@ urlpatterns = [
     path('pinjam', views.listPinjam, name='list_pinjam'),
     path('pinjam/create', views.addPinjam, name='add_pinjam'),
     path('pinjam/approve/<int:pk>/', views.approvePinjam, name='approve_pinjam'),
+    path('pinjam/return/<int:pk>/', views.returnPinjam, name='return_pinjam')
 ]

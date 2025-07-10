@@ -26,6 +26,7 @@ class Pinjam(models.Model):
         ('pending', 'Pending'),
         ('disetujui', 'Disetujui'),
         ('ditolak', 'Ditolak'),
+        ('dikembalikan', "Dikembalikan"),
     ]
 
     # TODO: Define fields here

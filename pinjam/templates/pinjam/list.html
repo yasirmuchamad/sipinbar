@@ -36,7 +36,14 @@
                         <a href="{% url 'pinjam:approve_pinjam' p.id %}">Setujui</a>
                     {% else %}
                         {{ p.status|title }}
-                    {% endif %}</td>
+                    {% endif %}
+                    |
+                    
+                    {% if p.status == "disetujui" and user.is_staff %}
+                        <a href="{% url 'pinjam:return_pinjam' p.id %}">Kembalikan</a>
+                    {% endif %}
+                        
+                </td>
             </tr>
             {% endfor %}
         </tbody>
