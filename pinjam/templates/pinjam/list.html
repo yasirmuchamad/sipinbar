@@ -1,53 +1,85 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-</head>
-<body>
-    <h3>{{ title }}</h3>
-    <table border="1">
-        <thead>
-            <th>Nama Peminjam</th>
-            <th>Nama Barang</th>
-            <th>Ketersediaan</th>
-            <th>Tgl Pinjam</th>
-            <th>Status</th>
-        </thead>
-        <tbody>
-            {% for p in pinjams %}
-            <tr>
-                <td>
-                    {{ p.karyawan }}
-                </td>
-                <td>
-                    {{ p.barang.nama_barang }}
-                </td>
-                <td>
-                    {{ p.barang.stock }}
-                </td>
-                <td>
-                    {{ p.tgl_pinjam }}
-                </td>
-                <td>
-                    
-                    {% if p.status == "pending" and user.is_staff %}
-                        <a href="{% url 'pinjam:approve_pinjam' p.id %}">Setujui</a>
-                    {% else %}
-                        {{ p.status|title }}
-                    {% endif %}
-                    |
-                    
-                    {% if p.status == "disetujui" and user.is_staff %}
-                        <a href="{% url 'pinjam:return_pinjam' p.id %}">Kembalikan</a>
-                    {% endif %}
-                        
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <a href="{% url 'pinjam:logout' %}">logout</a>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="row">
+    <div class="col-md">
+        <div class="card card-default">
+            <div class="card-body">
+                {% if messages %}
+                {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %} auto-dismiss">
+                    {{ message }}
+                </div>
+                {% endfor %}
+
+                {% endif %}
+                <div class="content">
+                    <div class="card-body">
+                        <div class="dataTables_wrapper dt-bootstraps4">
+                            <div class="row no-print mb-4">
+                              
+                                <div class="col-md">
+                                    <div class="d-flex justify-content-end md-2">
+                                        <!-- <label for="filter-input">Filter:</label> -->
+                                        <input type="text" id="filter-input" class="form-control d-flex align-items-center justify-content-center mr-2" placeholder="Search" style="margin: 2px;">
+                                    
+                                        <a href="" class="btn btn-secondary d-flex align-items-center justify-content-center mr-2" style="width: 150px; margin: 2px;">
+                                            <ion-icon name="newspaper-outline" style="width: 25px; height: 25px; margin-right: 5px;"></ion-icon> Export
+                                        </a>
+                                        <a href="" class="btn btn-secondary d-flex align-items-center justify-content-center" onclick="printSection()" style="width: 150px; margin: 2px;">
+                                            <ion-icon name="print-outline" style="width: 25px; height: 25px; margin-right: 5px;"></ion-icon> Print
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <table class="table table-bordered table-striped dataTable dtr-inline table-hover" style="text-align: center;">
+                                <thead>
+                                    <th>No</th>
+                                    <th>Nama Peminjam</th>
+                                    <th>Nama Barang</th>
+                                    <th>Ketersediaan</th>
+                                    <th>Tgl Pinjam</th>
+                                    <th>Status</th>
+                                </thead>
+                                <tbody>
+                                    {% for p in pinjams %}
+                                    <tr>
+                                        <td>{{ forloop.counter }}</td>
+                                        <td>
+                                            {{ p.karyawan }}
+                                        </td>
+                                        <td>
+                                            {{ p.barang.nama_barang }}
+                                        </td>
+                                        <td>
+                                            {{ p.barang.stock }}
+                                        </td>
+                                        <td>
+                                            {{ p.tgl_pinjam }}
+                                        </td>
+                                        <td>
+                                            
+                                            {% if p.status == "pending" and user.is_staff %}
+                                                <a href="{% url 'pinjam:approve_pinjam' p.id %}">Setujui</a>
+                                            {% else %}
+                                                {{ p.status|title }}
+                                            {% endif %}
+                                            {% if p.status == "disetujui" and user.is_staff %}
+                                            | 
+                                                <a href="{% url 'pinjam:return_pinjam' p.id %}">Kembalikan</a>
+                                            {% endif %}
+                                                
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+        
+{% endblock content %}

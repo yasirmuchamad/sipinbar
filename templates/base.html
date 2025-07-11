@@ -1,0 +1,398 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>
+
+    {% block title %}
+        {{ subtitle }}
+    {% endblock title %}
+
+  </title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> -->
+  <link rel="icon" type="image/png" href="{% static 'img/logo_gti.png' %}">
+  <!-- Custom -->
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'css/alert.css' %}">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'css/fa/all.css' %}">
+  <!-- <link rel="stylesheet" href="{% static 'css/ionicons.min.css' %}"> -->
+  <!-- Ionicons -->
+  <!-- Tambahkan ini di dalam tag <head> -->
+  <link rel="stylesheet" href="https://unpkg.com/ionicons@5.5.2/dist/css/ionicons.min.css">
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Tempusdominus Bootstrap 4 -->
+  <link rel="stylesheet" href="{% static 'plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css' %}">
+  <!-- iCheck -->
+  <link rel="stylesheet" href="{% static 'plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+  <!-- JQVMap -->
+  <link rel="stylesheet" href="{% static 'plugins/jqvmap/jqvmap.min.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'css/adminLte/adminlte.min.css' %}">
+  <!-- overlayScrollbars -->
+  <link rel="stylesheet" href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}">
+  <!-- Daterange picker -->
+  <link rel="stylesheet" href="{% static 'plugins/daterangepicker/daterangepicker.css' %}">
+  <!-- summernote -->
+  <link rel="stylesheet" href="{% static 'plugins/summernote/summernote-bs4.min.css' %}">
+  <!-- <link rel="stylesheet" href="https://kit.fontawesome.com/554226c89d.css" crossorigin="anonymous"> -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    .print-only {
+        display: none;
+      }
+    @media print {
+      body {
+        font-size: 12px;
+      }
+
+      .print-only {
+        display: block;
+        text-align: center;
+        /* margin-top: 14px; */
+        margin-bottom: 10px;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .print-only p {
+        font-size: 12px;
+        font-weight: normal;
+      }
+
+      table {
+        table-layout: auto !important;
+        /* page-break-inside: auto; */
+        width: auto !important;
+        border-collapse: collapse !important;
+        margin: 0 auto;
+      }
+
+      tr {
+          page-break-inside: avoid;
+          page-break-after: auto;
+      }
+
+      td, th {
+          padding: 4px 6px !important;
+          white-space: nowrap !important; /* ini mencegah isi kolom membungkus ke bawah */
+          border: 1px solid black;
+      }
+
+      @page {
+        margin: 20mm;
+      }
+
+      body::before,
+      body::after{
+        display: none;
+      }
+      @page {
+        size: auto;
+        margin: 10mm;
+      }
+
+      body * {
+        /* visibility: hiden; */
+        visibility: visible;
+      }
+      /* .no-print, footer, .sidebar {
+        display:none;
+      }  */
+      
+
+      #print-area, #print-area * {
+        visibility: visible;
+      }
+      #print-area {
+        position: absolute;
+        left : 0;
+        top : 0;
+      }
+
+      .no-print, .no-print * {
+        display:none !important;
+      }
+    }
+    
+    .bg-grey {
+      background-color: rgb(186, 186, 186);
+    }
+
+    ion-icon {
+      font-size: 34px;
+    }
+
+    #side-menu{
+      font-size: 24px;
+    }
+  </style>
+   <!-- <style>
+    body {
+        background-image: url("{% static 'img/bg.jpg' %}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        height: 100vh;
+        margin: 0;
+    }
+</style> -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  {% block js %}
+
+  {% endblock js %} 
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+  <!-- Preloader -->
+  <div class="preloader flex-column justify-content-center align-items-center">
+    <img class="animation__shake" src="{% static 'img/logo_gti.png' %}" alt="Logo GTI" height="60" width="60">
+  </div>
+
+
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="" class="brand-link">
+      <img src="{% static 'img/logo_gti.png' %}" alt="Logo GTI" class="brand-image img-circle elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Recruitment System</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img src="{% static 'img/user1-128x128.jpg' %} " class="img-circle elevation-2" alt="User Image">
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">Administrator</a>
+        </div>
+      </div> -->
+
+      <!-- SidebarSearch Form -->
+      <!-- <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div> -->
+
+      <!-- Sidebar Menu -->
+       <nav class="mt-2">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          
+          <!-- <li class="nav-item menu-close"> -->
+            
+              <!-- <ul class="nav nav-treeview"> -->     
+                
+                
+                <li class="nav-item">
+                  <a href="" class="nav-link">
+                    <!-- <i class="nav-icon fas fa-tachometer-alt"></i> -->
+                    <ion-icon name="home-outline" id="side-menu"></ion-icon>
+                    <p>
+                      Dashboard
+                    </p>
+                  </a>
+                </li>
+               
+                <li class="nav-item">
+                <a href="" class="nav-link">
+                    <!-- <i class="fas fa-table nav-icon"></i> -->
+                    <ion-icon name="business-outline" id="side-menu"></ion-icon>
+                    <p>Departement</p>
+                    </a>
+                </li>
+                
+                <li class="nav-item">
+                  <a href="" class="nav-link">
+                    <!-- <i class="fas fa-desktop nav-icon"></i> -->
+                    <ion-icon name="podium-outline" id="side-menu"></ion-icon>
+                    <p>Monitoring</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="" class="nav-link">
+                    <!-- <i class="fas fa-book nav-icon"></i> -->
+                    <ion-icon name="person-add-outline" id="side-menu"></ion-icon>
+                    <p>PTK</p>
+                </a>
+                </li>
+                  <li class="nav-item">
+                    <a href="" class="nav-link">
+                      <!-- <i class="fas fa-desktop nav-icon"></i> -->
+                      <ion-icon name="people-outline" id="side-menu"></ion-icon>
+                      <p>User</p>
+                    </a>
+                  </li>
+                
+                <li class="nav-item">
+                  <a href="" class="nav-link" onclick="return confirm('Yakin ingin keluar aplikasi?');">
+                    <!-- <i class="fas fa-solid fa-right-to-bracket nav-icon"></i> -->
+                    <ion-icon name="log-out-outline" id="side-menu"></ion-icon>
+                    <p>Logout</p>
+                  </a>
+                </li> 
+              <!-- </ul> -->
+              
+          <!-- </li> -->
+
+
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper  bg-grey" id="print-area">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 print-area" id="print-area">{{ daftar }} {{ title }}</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">{{ subtitle }}</a></li>
+              <li class="breadcrumb-item active">{{ title }}</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+
+
+        {% block content %}
+
+        {% endblock content %}
+
+
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <footer class="main-footer no-print">
+    <strong>Copyright &copy; 2025 <a href="https://yasirmuchamad.github.io">Muchamad Yasir</a>.</strong>
+    All rights reserved.
+    <div class="float-right d-none d-sm-inline-block">
+      <b>Version</b> 1.00
+    </div>
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<script>
+  function printSection() {
+    window.print();
+  }
+</script>
+<!-- piechart -->
+<script>
+  // fetch( url 'rekrutmen:get_pie_chart_data' )
+  //     .then(response => response.json())
+  //     .then(data => {
+  //         var pieChartCanvas = $('#pieChart').get(0).getContext('2d');
+  //         var pieData = {
+  //           datasets: data.datasets,
+  //           labels: data.labels
+  //         }
+  //         var pieOptions = {
+  //             maintainAspectRatio: false,
+  //             responsive: true,
+  //         }
+  //         new Chart(pieChartCanvas, {
+  //             type: 'pie',
+  //             data: pieData,
+  //             options: pieOptions
+  //         });
+  //     });
+</script>
+
+<script>
+  // Hilangkan semua alert dengan class 'auto-dismiss' setelah 3 detik
+  setTimeout(function() {
+      document.querySelectorAll('.auto-dismiss').forEach(function(alert) {
+          // Tambahkan efek fade-out
+          alert.style.transition = "opacity 0.5s ease";
+          alert.style.opacity = 0;
+
+          // Hapus elemen dari DOM setelah efek selesai
+          setTimeout(function() {
+              alert.remove();
+          }, 500);
+      });
+  }, 3000); // 3000 ms = 3 detik
+</script>
+
+<script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+<!-- jQuery -->
+<script src="{% static 'js/jquery/jquery.js' %}"></script>
+<!-- <script src="https://kit.fontawesome.com/554226c89d.js" crossorigin="anonymous"></script>//fa cdn -->
+<script src="{% static 'plugins/jquery/jquery.min.js' %} "></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="{% static 'plugins/jquery-ui/jquery-ui.min.js' %} "></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+  $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %} "></script>
+<!-- ChartJS -->
+<script src="{% static 'plugins/chart.js/Chart.min.js' %} "></script>
+<!-- Sparkline -->
+<script src="{% static 'plugins/sparklines/sparkline.js' %} "></script>
+<!-- JQVMap -->
+<script src="{% static 'plugins/jqvmap/jquery.vmap.min.js' %} "></script>
+<script src="{% static 'plugins/jqvmap/maps/jquery.vmap.usa.js' %} "></script>
+<!-- jQuery Knob Chart -->
+<script src="{% static 'plugins/jquery-knob/jquery.knob.min.js' %} "></script>
+<!-- daterangepicker -->
+<script src="{% static 'plugins/moment/moment.min.js' %} "></script>
+<script src="{% static 'plugins/daterangepicker/daterangepicker.js' %} "></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="{% static 'plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js' %} "></script>
+<!-- Summernote -->
+<script src="{% static 'plugins/summernote/summernote-bs4.min.js' %} "></script>
+<!-- overlayScrollbars -->
+<script src="{% static 'plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js' %} "></script>
+<!-- AdminLTE App -->
+<!-- <script src="{% static 'plugins/fontawesome-free/webfonts/fa-solid-900.woff2' %} "></script> -->
+<script src="{% static 'js/adminlte.min.js' %} "></script>
+<!-- AdminLTE for demo purposes -->
+<!-- <script src="dist/js/demo.js"></script> -->
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="{% static 'js/pages/dashboard.js' %} "></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<!-- Chart.js -->
+
+</script>
+</body>
+</html>
