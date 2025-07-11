@@ -21,12 +21,18 @@ SIPINBAR adalah aplikasi web berbasis Django untuk mencatat peminjaman dan penge
 
 ## Menjalankan Aplikasi (Development)
 1. Clone repository ini:
-2. Install virtual environment & dependencies:
-3. Migrasi database:
+   - https://github.com/yasirmuchamad/sipinbar.git
+3. Install virtual environment & dependencies:
+   - python -m venv venv
+   - unix: source venv/bin/activate / Windows: venv\Scripts\activate
+   - pip install -r requirements.txt
+4. Migrasi database:
+    - python manage.py makemigrations
+    - python menage.py migrate
+6. Jalankan server:
+   - python manage.py runserver
 
-4. Jalankan server:
-
-5. Akses di browser: `http://127.0.0.1:8000/`
+8. Akses di browser: `http://127.0.0.1:8000/`
 ## Akun Login
 - Admin
   - Username: admin
