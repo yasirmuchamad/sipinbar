@@ -53,10 +53,13 @@ def addPinjam(request):
     if request.method == 'POST':
         if form.is_valid():
             pinjam = form.save(commit=False)
+            pinjam.karyawan = request.user
             pinjam.status = 'pending'
             pinjam.save()
             
             return redirect('pinjam:list_pinjam')
+        else:
+            print("forms error", form.errors)
 
     context = {
         "title" : "Pinjam Barang",

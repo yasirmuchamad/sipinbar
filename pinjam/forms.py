@@ -17,4 +17,12 @@ class PinjamForm(forms.ModelForm):
         """Meta definition for Pinjamform."""
 
         model = Pinjam
-        fields = '__all__'
+        fields = ['barang']
+
+    def __init__(self, *args, **kwargs):
+        super(PinjamForm, self).__init__(*args, **kwargs)
+        # self.fields['karyawan'].widget.attrs.update({'id':'karyawan', 'name':'karyawan', 'class':'form-control'})
+        self.fields['barang'].widget.attrs.update({'id':'barang', 'name':'barang', 'class':'form-control'})
+        # self.fields['tgl_pinjam'].widget.attrs.update({'id':'tgl_pinjam', 'name':'tgl_pinjam', 'class':'form-control'})
+        # self.fields['status'].widget.attrs.update({'id':'status', 'name':'status', 'class':'form-control'})
+
